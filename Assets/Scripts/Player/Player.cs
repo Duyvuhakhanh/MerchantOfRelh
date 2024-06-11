@@ -87,6 +87,10 @@ public class Player : MonoBehaviourSingleton<Player>
             }
         }
     }
+    public void OnResetHand()
+    {
+        playerTickedItems.Clear();
+    }
 }
 [Serializable]
 public class Price

@@ -3,21 +3,24 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class Shop : MonoBehaviourSingleton<Shop>, ITradeable
+public class Shop : MonoBehaviourSingleton<Shop>
 {
     [SerializeField] private List<ShopItem> shopItems;
     [SerializeField] private ShopItem shopItemPrefabs;
     [SerializeField] private Transform itemHolder;
     [SerializeField] private List<TradingItem> itemsPool = new();
+    [SerializeField] private ItemDatabaseConfig itemDatabaseConfig;
+    
+
     [ContextMenu("Init Pool")]
     void InitPool()
     {
-        for (int i = 0; i < 100; i++)
+        var dupCount = 4;
+        for (int i = 0; i < dupCount; i++)
         {
-
-            var newItem = new TradingItem() { itemId = i +"s", name = "a" + i, price = new() { springPrice = i, summerPrice = i * 2, autumnPrice = i * 3, winterPrice = i*4} };
-            itemsPool.Add(newItem);
+            itemsPool.AddRange(itemDatabaseConfig.tradingItems);
         }
     }
     private void Start()
@@ -38,8 +41,13 @@ public class Shop : MonoBehaviourSingleton<Shop>, ITradeable
             shopItem.gameObject.SetActive(true);
             shopItems.Add(shopItem);
         }
+        StartCoroutine(IDisableGrid());
     }
-
+    IEnumerator IDisableGrid()
+    {
+        yield return new WaitForEndOfFrame();
+        itemHolder.GetComponent<GridLayoutGroup>().enabled = false;
+    }
 
 
     private void ShopItem_OnBuyShopItem(ShopItem shopItem)
@@ -49,13 +57,13 @@ public class Shop : MonoBehaviourSingleton<Shop>, ITradeable
         shopItem.gameObject.SetActive(false);
     }
 
-    [ContextMenu("RollNewShop")]
-    public void RollNewShop()
+    [ContextMenu("RefreshShop")]
+    public void RefreshShop()
     {
         for (int i = 0; i < shopItems.Count; i++)
         {
             var item = shopItems[i];
-            ReturnItemToPool(item.GetTradingItem());
+            if(item.gameObject.activeSelf) ReturnItemToPool(item.GetTradingItem());
             item.Init(GetItemFromPool());
             item.gameObject.SetActive(true);
         }
@@ -79,16 +87,9 @@ public class Shop : MonoBehaviourSingleton<Shop>, ITradeable
         }
     }
 
-    public void OnTradingWithPlayer(Player player, params object[] @params)
-    {
-        if (@params.Length > 0 && @params[0] is TradingItem)
-        {
-
-        }
-    }
 
     public void OnSeasonChange()
     {
-        RollNewShop();
+        RefreshShop();
     }
 }

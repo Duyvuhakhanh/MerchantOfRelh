@@ -12,6 +12,7 @@ public class PlayerHandVisual : MonoBehaviour
 
     public void ShowHandVisual()
     {
+        ResetHand();
         foreach (TradingItem item in player.GetPlayerItems())
         {
             PlayerItem playerItem = Instantiate(itemPrefab, itemHoldPoint);
@@ -22,5 +23,13 @@ public class PlayerHandVisual : MonoBehaviour
         }
     }
 
+    private void ResetHand()
+    {
+        player.OnResetHand();
 
+        foreach (Transform itemTrans in itemHoldPoint)
+        {
+            if (itemTrans != itemPrefab.transform) Destroy(itemTrans.gameObject);
+        }
+    }
 }
