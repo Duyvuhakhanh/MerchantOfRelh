@@ -15,6 +15,7 @@ public class PlayerItem : MonoBehaviour
         toggle.isOn = false;
         toggle.onValueChanged.AddListener(OnTickItem);
     }
+    public TradingItem GetTradingItem() => itemData;
     public void SetData(TradingItem item)
     {
         itemData = item;

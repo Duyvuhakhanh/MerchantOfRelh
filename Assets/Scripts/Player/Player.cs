@@ -5,12 +5,15 @@ using UnityEngine;
 
 public class Player : MonoBehaviourSingleton<Player>
 {
-    [SerializeField] private int playerCoins;
-    [SerializeField] private int playerReputation;
+    [SerializeField] private int playerCoins = 20;
+    [SerializeField] private int playerReputation = 0;
     [SerializeField] private PlayerHandVisual handVisual;
-    [SerializeField] private List<PlayerItem> playerTickedItems;
+    public List<PlayerItem> playerTickedItems;
+    public event Action<int> OnCoinChange;
+    public event Action<int> OnReputaionChange;
 
     private List<TradingItem> tradingItems = new();
+    public event Action<TradingItem> OnHandChange;
 
     private void Start()
     {
@@ -29,15 +32,19 @@ public class Player : MonoBehaviourSingleton<Player>
     {
         if (!tradingItems.Contains(item)) return;
         tradingItems.Remove(item);
+        OnHandChange?.Invoke(item);
     }
-    public void BuyAnItem(TradingItem item)
+    public bool TryBuyAnItem(TradingItem item)
     {
-        int adjustCoin = -SeasonManager.Instance.GetItemPriceBySeason(item);
-        AdjustPlayerCoins(adjustCoin);
+        int adjustCoin = SeasonManager.Instance.GetItemPriceBySeason(item);
+        if (playerCoins < adjustCoin) return false;
+
+        AdjustPlayerCoins(-adjustCoin);
         AddItemToHand(item);
 
         int reponsitiveGain = 1;
         AdjustPlayerResponsitive(reponsitiveGain);
+        return true;
     }
 
     public void Trade(ITradeable target,params object[] @params)
@@ -46,15 +53,17 @@ public class Player : MonoBehaviourSingleton<Player>
     }
     public void AdjustPlayerCoins(int amount)
     {
+        var pre = playerCoins;
         playerCoins += amount;
         if (playerCoins < 0)
         {
             playerCoins = 0;
         }
+        OnCoinChange?.Invoke(playerCoins - pre);
     }
     public void SetPlayerCoins(int amount) => playerCoins = amount;
  
-    public int GetPlayerResponsitive() =>  playerReputation;
+    public int GetPlayerReputation() =>  playerReputation;
     public void AdjustPlayerResponsitive(int amount)
     {
         playerReputation += amount;
@@ -62,12 +71,13 @@ public class Player : MonoBehaviourSingleton<Player>
         {
             playerReputation = 0;
         }
+        OnReputaionChange?.Invoke(amount);
     }
     public void SetPlayerReponsitive(int amount) => playerReputation = amount;
 
     public void OnButtonShowHandClick()
     {
-        handVisual.ShowHandVisual();
+        handVisual.RefreshHandVisual();
         handVisual.gameObject.SetActive(true);
     }
     public void OnTickPlayerItem(PlayerItem item, bool hasTick)

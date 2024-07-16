@@ -10,9 +10,24 @@ public class PlayerHandVisual : MonoBehaviour
     [Header("Debug")]
     [SerializeField] private List<PlayerItem> playerItems;
 
-    public void ShowHandVisual()
+    private void Start()
+    {
+        player.OnHandChange += Player_OnHandChange;
+    }
+
+    private void Player_OnHandChange(TradingItem obj)
+    {
+        RefreshHandVisual();
+    }
+
+    public void RefreshHandVisual()
     {
         ResetHand();
+        RefeshHand();
+    }
+
+    private void RefeshHand()
+    {
         foreach (TradingItem item in player.GetPlayerItems())
         {
             PlayerItem playerItem = Instantiate(itemPrefab, itemHoldPoint);
