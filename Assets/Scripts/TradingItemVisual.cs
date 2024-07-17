@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class TradingItemVisual : MonoBehaviour
 {
     [SerializeField] private Image itemSprite;
+    [SerializeField] private Image itemGuildSprite;
     [SerializeField] private TextMeshProUGUI springPrice;
     [SerializeField] private TextMeshProUGUI summerPrice;
     [SerializeField] private TextMeshProUGUI autumnPrice;
@@ -17,7 +18,16 @@ public class TradingItemVisual : MonoBehaviour
         summerPrice.text = $"Summer: " + item.price.summerPrice.ToString();
         autumnPrice.text = $"Autumn: " + item.price.autumnPrice.ToString();
         winterPrice.text = $"Winter: " + item.price.winterPrice.ToString();
-        itemSprite.sprite = item.itemSprite;
+
+        if(itemSprite != null)
+        {
+            itemSprite.sprite = item.itemSprite;
+        }
+
+        if (itemGuildSprite != null && item.itemGuildSprite != null)
+        {
+            itemGuildSprite.sprite = item.itemGuildSprite;
+        }
     }
 }
 

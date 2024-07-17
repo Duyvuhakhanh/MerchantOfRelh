@@ -15,6 +15,7 @@ MonoBehaviour:
   tradingItems:
   - itemId: carrot
     itemSprite: {fileID: 21300000, guid: a5e0a163bec4ca744ac7c42c1e79ebc4, type: 3}
+    itemGuildSprite: {fileID: 21300000, guid: bbb6d83e204d56e4cb70c8ad2eebc9bd, type: 3}
     name: carrot
     price:
       springPrice: 1
@@ -23,6 +24,7 @@ MonoBehaviour:
       winterPrice: 1
   - itemId: cheese
     itemSprite: {fileID: 21300000, guid: 202c0a635aee1c946a08f27a8fa19345, type: 3}
+    itemGuildSprite: {fileID: 21300000, guid: 6195adc0d3e933143bed450d56dc6c29, type: 3}
     name: cheese
     price:
       springPrice: 1
@@ -31,6 +33,7 @@ MonoBehaviour:
       winterPrice: 1
   - itemId: diamond
     itemSprite: {fileID: 21300000, guid: e8a1d87a21a03dc44ac7e0766a12067b, type: 3}
+    itemGuildSprite: {fileID: 0}
     name: diamond
     price:
       springPrice: 3
@@ -39,6 +42,7 @@ MonoBehaviour:
       winterPrice: 3
   - itemId: corn
     itemSprite: {fileID: 21300000, guid: 23bf94a5dc79f3848985c01d345a17d4, type: 3}
+    itemGuildSprite: {fileID: 21300000, guid: 750d3f0236ea3394d876dffd23187a70, type: 3}
     name: corn
     price:
       springPrice: 1
@@ -47,6 +51,7 @@ MonoBehaviour:
       winterPrice: 4
   - itemId: honey
     itemSprite: {fileID: 21300000, guid: 0a7ca1fccc467d14393a45877e5e6a99, type: 3}
+    itemGuildSprite: {fileID: 21300000, guid: 3c99b720d1551bd4cb50cc5d9bd415bb, type: 3}
     name: honey
     price:
       springPrice: 1
@@ -55,7 +60,71 @@ MonoBehaviour:
       winterPrice: 2
   - itemId: milk
     itemSprite: {fileID: 21300000, guid: f1d57256606ebe444b92d9aeb02e4a7f, type: 3}
+    itemGuildSprite: {fileID: 21300000, guid: 4c8f35efabe1c3d469380acf06b78ee5, type: 3}
     name: milk
+    price:
+      springPrice: 2
+      summerPrice: 2
+      autumnPrice: 4
+      winterPrice: 4
+  - itemId: watermelon
+    itemSprite: {fileID: 21300000, guid: 566602196b67ce549ac137040a754fcb, type: 3}
+    itemGuildSprite: {fileID: 21300000, guid: cf4e07f02e21f994586cfca565f9a83d, type: 3}
+    name: watermelon
+    price:
+      springPrice: 2
+      summerPrice: 2
+      autumnPrice: 4
+      winterPrice: 4
+  - itemId: wine
+    itemSprite: {fileID: 21300000, guid: 566602196b67ce549ac137040a754fcb, type: 3}
+    itemGuildSprite: {fileID: 21300000, guid: a77c0bd2831cffa478a340742ff96ca3, type: 3}
+    name: watermelon
+    price:
+      springPrice: 2
+      summerPrice: 2
+      autumnPrice: 4
+      winterPrice: 4
+  - itemId: lecture
+    itemSprite: {fileID: 21300000, guid: 00caf2bec9fad13439b7831c4753767c, type: 3}
+    itemGuildSprite: {fileID: 21300000, guid: 4d5ad51bc4e926641b18cc8ff8ab482b, type: 3}
+    name: lecture
+    price:
+      springPrice: 2
+      summerPrice: 2
+      autumnPrice: 4
+      winterPrice: 4
+  - itemId: jam
+    itemSprite: {fileID: 21300000, guid: 18776e70fa3486346b2ed842f3c4c516, type: 3}
+    itemGuildSprite: {fileID: 21300000, guid: 8d9a18907111e6543af5290648097222, type: 3}
+    name: jam
+    price:
+      springPrice: 2
+      summerPrice: 2
+      autumnPrice: 4
+      winterPrice: 4
+  - itemId: garlic
+    itemSprite: {fileID: 21300000, guid: f4485d8d1caae1349a10db7f500a2489, type: 3}
+    itemGuildSprite: {fileID: 21300000, guid: 8d9a18907111e6543af5290648097222, type: 3}
+    name: garlic
+    price:
+      springPrice: 2
+      summerPrice: 2
+      autumnPrice: 4
+      winterPrice: 4
+  - itemId: ham
+    itemSprite: {fileID: 21300000, guid: 4d39510a4448fda409818eefc2328826, type: 3}
+    itemGuildSprite: {fileID: 21300000, guid: ba2a2078f4089cd4db14b65872e2d12b, type: 3}
+    name: ham
+    price:
+      springPrice: 2
+      summerPrice: 2
+      autumnPrice: 4
+      winterPrice: 4
+  - itemId: tomato
+    itemSprite: {fileID: 21300000, guid: 0a83d261412658f48838b7a0bea5bd6e, type: 3}
+    itemGuildSprite: {fileID: 21300000, guid: 8ed35d3c196436a43ae725603f064185, type: 3}
+    name: tomato
     price:
       springPrice: 2
       summerPrice: 2

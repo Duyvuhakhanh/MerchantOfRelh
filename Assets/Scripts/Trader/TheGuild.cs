@@ -4,16 +4,39 @@ using UnityEngine;
 using System.Linq;
 using System;
 
-public class TheGuilde : MonoBehaviourSingleton<TheGuilde>, ITradeable
+public class TheGuild : MonoBehaviourSingleton<TheGuild>, ITradeable
 {
     [SerializeField] private List<TradingItem> tradingItems;
+    [SerializeField] private Transform itemHolder;
 
     [SerializeField] private List<TradingItem> itemsPool;
     [SerializeField] int[] reputationConfigArray = new int[3];
     [SerializeField] int[] coinConfigArray = new int[3];
+    [SerializeField] private ItemDatabaseConfig itemDatabaseConfig;
+    [SerializeField] private GuildItemVisual guildItemPrefabs;
+
+    private void Start()
+    {
+        InitPool();
+        int itemMax = 4;
+        for (int i = 0; i < itemMax; i++)
+        {
+            GuildItemVisual shopItem = Instantiate(guildItemPrefabs, itemHolder);
+            shopItem.Init(GetItemFromPool());
+            shopItem.gameObject.SetActive(true);
+        }
+    }
     public void OnSeasonChange()
     {
         
+    }
+    void InitPool()
+    {
+        var dupCount = 1;
+        for (int i = 0; i < dupCount; i++)
+        {
+            itemsPool.AddRange(itemDatabaseConfig.tradingItems);
+        }
     }
     [ContextMenu("RollNewShop")]
     public void RollNewItemsGuid()
