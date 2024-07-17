@@ -12,8 +12,9 @@ public class Shop : MonoBehaviourSingleton<Shop>
     [SerializeField] private Transform itemHolder;
     [SerializeField] private List<TradingItem> itemsPool = new();
     [SerializeField] private ItemDatabaseConfig itemDatabaseConfig;
-    
+    [SerializeField] private Button refreshButton;
 
+    private int maxReroll = 1;
     [ContextMenu("Init Pool")]
     void InitPool()
     {
@@ -26,6 +27,8 @@ public class Shop : MonoBehaviourSingleton<Shop>
     private void Start()
     {
         Init();
+        refreshButton.onClick.RemoveAllListeners();
+        refreshButton.onClick.AddListener(RefreshShop);
     }
     [ContextMenu("Init")]
 
@@ -62,6 +65,10 @@ public class Shop : MonoBehaviourSingleton<Shop>
     [ContextMenu("RefreshShop")]
     public void RefreshShop()
     {
+        if(--maxReroll <= 0)
+        {
+            refreshButton.interactable = false;
+        }
         for (int i = 0; i < shopItems.Count; i++)
         {
             var item = shopItems[i];
