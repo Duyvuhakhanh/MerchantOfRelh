@@ -10,19 +10,19 @@ public class PlayerInfoVisual : MonoBehaviour
     [SerializeField] private TextMeshProUGUI playerReputation;
     private void Start()
     {
-        player.OnCoinChange += Player_OnCoinChange;
-        player.OnReputaionChange += Player_OnReputaionChange;
+        player.playerData.OnCoinChange += Player_OnCoinChange;
+        player.playerData.OnReputaionChange += Player_OnReputaionChange;
         Player_OnReputaionChange(0);
         Player_OnCoinChange(0);
     }
 
-    private void Player_OnReputaionChange(int obj)
+    private void Player_OnReputaionChange(int reputaion)
     {
-        playerReputation.text = "Reputation: " + player.GetPlayerReputation().ToString();
+        playerReputation.text = "Reputation: " + reputaion;
     }
 
-    private void Player_OnCoinChange(int obj)
+    private void Player_OnCoinChange(int coin)
     { 
-        playerGold.text = "Coin: " + player.GetPlayerCoins().ToString();
+        playerGold.text = "Coin: " + coin;
     }
 }

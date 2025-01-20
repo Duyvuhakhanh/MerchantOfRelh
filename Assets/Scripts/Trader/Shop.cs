@@ -55,11 +55,11 @@ public class Shop : MonoBehaviourSingleton<Shop>
 
     private void ShopItem_OnBuyShopItem(ShopItem shopItem)
     {
-        var tradingItem = shopItem.GetTradingItem();
-        if (Player.Instance.TryBuyAnItem(tradingItem))
-        {
-            shopItem.gameObject.SetActive(false);
-        }
+        //var tradingItem = shopItem.GetTradingItem();
+        //if (Player.Instance.TryBuyAnItem(tradingItem))
+        //{
+        //    shopItem.gameObject.SetActive(false);
+        //}
     }
 
     [ContextMenu("RefreshShop")]
